@@ -4,18 +4,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, ArrowRightIcon } from "./Icons";
 
-// Lógica de precios:
-// - El excedente ($0.05) es más caro que el costo base de cualquier plan
-// - Cuanto más grande el plan, mejor precio por crédito incluido
-// - Starter: $0.03/crédito, Pro: $0.025/crédito, Ultra: $0.02/crédito
+// Lógica:
+// - Starter: base, 500 créditos
+// - Pro: 2x más valor (2000 créditos por ~2x precio)
+// - Ultra: 4x más valor (10,000 créditos por ~5x precio)
 
 const plans = [
   {
     name: "Starter",
     description: "Para arrancar a organizar tu pipeline con AI.",
-    price: { monthly: 15, annual: 12 },
+    price: { monthly: 25, annual: 20 },
     credits: "500",
-    costPerCredit: "$0.03",
+    multiplier: null,
     features: [
       "Contactos ilimitados",
       "Pipeline completo con AI",
@@ -29,13 +29,12 @@ const plans = [
   {
     name: "Pro",
     description: "Para quienes usan el CRM todos los días.",
-    price: { monthly: 25, annual: 20 },
-    credits: "1,000",
-    costPerCredit: "$0.025",
+    price: { monthly: 49, annual: 39 },
+    credits: "2,000",
+    multiplier: "2x",
     features: [
       "Todo lo del plan Starter",
-      "2x créditos AI",
-      "Mejor precio por crédito",
+      "2x más valor en créditos",
       "Alertas inteligentes",
       "Soporte prioritario",
     ],
@@ -45,13 +44,12 @@ const plans = [
   {
     name: "Ultra",
     description: "Para uso intensivo del CRM.",
-    price: { monthly: 40, annual: 32 },
-    credits: "2,000",
-    costPerCredit: "$0.02",
+    price: { monthly: 129, annual: 99 },
+    credits: "10,000",
+    multiplier: "4x",
     features: [
       "Todo lo del plan Pro",
-      "4x créditos AI",
-      "El mejor precio por crédito",
+      "4x más valor en créditos",
       "Múltiples pipelines",
       "Onboarding asistido",
     ],
@@ -79,7 +77,7 @@ export function Pricing() {
           <p className="text-xl text-[#666666] max-w-2xl mx-auto font-light">
             Pagás un fijo mensual con créditos AI incluidos.
             <br />
-            <span className="text-sm">Más grande el plan, mejor precio por crédito.</span>
+            <span className="text-sm">Más grande el plan, más valor por tu dinero.</span>
           </p>
         </div>
 
@@ -154,9 +152,11 @@ export function Pricing() {
               <div className="mb-6 p-3 bg-[#F5F5F5] rounded-xl">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-[#1D1616]">{plan.credits} créditos/mes</span>
-                </div>
-                <div className="text-xs text-[#666666] mt-1">
-                  {plan.costPerCredit}/crédito incluido
+                  {plan.multiplier && (
+                    <span className="text-xs font-bold text-white bg-[#8E1616] px-2 py-0.5 rounded">
+                      {plan.multiplier}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -187,8 +187,8 @@ export function Pricing() {
         <div className="mt-16 max-w-2xl mx-auto text-center">
           <h3 className="text-lg font-semibold text-[#1D1616] mb-3">¿Qué son los créditos AI?</h3>
           <p className="text-sm text-[#666666] leading-relaxed">
-            Cada interacción con la AI consume créditos. Agregar un contacto, actualizar el pipeline, 
-            generar un follow-up. Si necesitás más, podés comprar créditos adicionales a <strong>$0.05/crédito</strong>.
+            Cada interacción con la AI consume créditos: agregar un contacto, actualizar el pipeline, 
+            generar un follow-up. Si necesitás más, podés comprar créditos adicionales.
           </p>
         </div>
 
