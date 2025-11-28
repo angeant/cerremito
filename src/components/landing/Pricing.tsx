@@ -4,16 +4,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, ArrowRightIcon } from "./Icons";
 
-// Lógica:
-// - Starter: base, 500 créditos
-// - Pro: 2x más valor (2000 créditos por ~2x precio)
-// - Ultra: 4x más valor (10,000 créditos por ~5x precio)
-
 const plans = [
   {
     name: "Starter",
     description: "Para arrancar a organizar tu pipeline con AI.",
-    price: { monthly: 25, annual: 20 },
+    price: { monthly: 19.99, annual: 15.99 },
     credits: "500",
     multiplier: null,
     features: [
@@ -29,7 +24,7 @@ const plans = [
   {
     name: "Pro",
     description: "Para quienes usan el CRM todos los días.",
-    price: { monthly: 49, annual: 39 },
+    price: { monthly: 39.99, annual: 31.99 },
     credits: "2,000",
     multiplier: "2x",
     features: [
@@ -44,7 +39,7 @@ const plans = [
   {
     name: "Ultra",
     description: "Para uso intensivo del CRM.",
-    price: { monthly: 129, annual: 99 },
+    price: { monthly: 129.99, annual: 99.99 },
     credits: "10,000",
     multiplier: "4x",
     features: [
@@ -57,6 +52,12 @@ const plans = [
     popular: false,
   },
 ];
+
+function formatPrice(price: number) {
+  const whole = Math.floor(price);
+  const decimal = Math.round((price - whole) * 100);
+  return { whole, decimal };
+}
 
 export function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true);
@@ -105,82 +106,91 @@ export function Pricing() {
             <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${
               isAnnual ? 'bg-[#D84040] text-white' : 'bg-[#E0E0E0] text-[#666666]'
             }`}>
-              -20%
+              hasta -23%
             </span>
           </button>
         </div>
 
         {/* Plans Grid */}
         <div className="grid md:grid-cols-3 gap-6">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl ${
-                plan.popular 
-                  ? 'border-[#8E1616] shadow-lg shadow-[#8E1616]/10 scale-105' 
-                  : 'border-[#E0E0E0] hover:border-[#D0D0D0]'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-[#8E1616] to-[#D84040] text-white text-xs font-semibold px-4 py-1.5 rounded-full">
-                    Más elegido
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-[#1D1616] mb-2">{plan.name}</h3>
-                <p className="text-sm text-[#666666]">{plan.description}</p>
-              </div>
-
-              <div className="mb-4">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-[#1D1616]">
-                    USD {isAnnual ? plan.price.annual : plan.price.monthly}
-                  </span>
-                  <span className="text-[#999999]">/mes</span>
-                </div>
-                {isAnnual && (
-                  <p className="text-xs text-[#8E1616] mt-1">
-                    Facturado anualmente
-                  </p>
-                )}
-              </div>
-
-              {/* Credits info */}
-              <div className="mb-6 p-3 bg-[#F5F5F5] rounded-xl">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-[#1D1616]">{plan.credits} créditos/mes</span>
-                  {plan.multiplier && (
-                    <span className="text-xs font-bold text-white bg-[#8E1616] px-2 py-0.5 rounded">
-                      {plan.multiplier}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <Button
-                className={`w-full py-6 text-base rounded-xl mb-6 group ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-[#8E1616] to-[#D84040] hover:from-[#7A1313] hover:to-[#C03636] text-white shadow-lg shadow-[#D84040]/20'
-                    : 'bg-[#1D1616] hover:bg-[#2A2020] text-white'
+          {plans.map((plan) => {
+            const price = isAnnual ? plan.price.annual : plan.price.monthly;
+            const { whole, decimal } = formatPrice(price);
+            
+            return (
+              <div
+                key={plan.name}
+                className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl ${
+                  plan.popular 
+                    ? 'border-[#8E1616] shadow-lg shadow-[#8E1616]/10 scale-105' 
+                    : 'border-[#E0E0E0] hover:border-[#D0D0D0]'
                 }`}
               >
-                {plan.cta}
-                <ArrowRightIcon className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-gradient-to-r from-[#8E1616] to-[#D84040] text-white text-xs font-semibold px-4 py-1.5 rounded-full">
+                      Más elegido
+                    </span>
+                  </div>
+                )}
 
-              <ul className="space-y-3">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-[#666666]">
-                    <CheckIcon className="w-5 h-5 text-[#8E1616] flex-shrink-0 mt-0.5" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-[#1D1616] mb-2">{plan.name}</h3>
+                  <p className="text-sm text-[#666666]">{plan.description}</p>
+                </div>
+
+                <div className="mb-4">
+                  <div className="flex items-baseline gap-0.5">
+                    <span className="text-lg text-[#1D1616]">USD</span>
+                    <span className="text-4xl font-bold text-[#1D1616]">
+                      {whole}
+                    </span>
+                    <span className="text-lg font-semibold text-[#1D1616] self-start mt-1">
+                      .{decimal.toString().padStart(2, '0')}
+                    </span>
+                    <span className="text-[#999999] ml-1">/mes</span>
+                  </div>
+                  {isAnnual && (
+                    <p className="text-xs text-[#8E1616] mt-1">
+                      Facturado anualmente
+                    </p>
+                  )}
+                </div>
+
+                {/* Credits info */}
+                <div className="mb-6 p-3 bg-[#F5F5F5] rounded-xl">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-[#1D1616]">{plan.credits} créditos/mes</span>
+                    {plan.multiplier && (
+                      <span className="text-xs font-bold text-white bg-[#8E1616] px-2 py-0.5 rounded">
+                        {plan.multiplier}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <Button
+                  className={`w-full py-6 text-base rounded-xl mb-6 group ${
+                    plan.popular
+                      ? 'bg-gradient-to-r from-[#8E1616] to-[#D84040] hover:from-[#7A1313] hover:to-[#C03636] text-white shadow-lg shadow-[#D84040]/20'
+                      : 'bg-[#1D1616] hover:bg-[#2A2020] text-white'
+                  }`}
+                >
+                  {plan.cta}
+                  <ArrowRightIcon className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+
+                <ul className="space-y-3">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-[#666666]">
+                      <CheckIcon className="w-5 h-5 text-[#8E1616] flex-shrink-0 mt-0.5" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
 
         {/* Credits explanation */}
