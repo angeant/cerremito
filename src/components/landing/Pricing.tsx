@@ -4,6 +4,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, ArrowRightIcon } from "./Icons";
 
+// Lógica de valor:
+// - Starter: $0.04/crédito (base)
+// - Pro: $0.02/crédito (2x mejor valor)
+// - Ultra: $0.01/crédito (4x mejor valor)
+
 const plans = [
   {
     name: "Starter",
@@ -18,14 +23,14 @@ const plans = [
       "Spaces por cliente",
       "Reportes semanales",
     ],
-    cta: "Escribinos",
+    cta: "Elegir Starter",
     popular: false,
   },
   {
     name: "Pro",
     description: "Para quienes usan el CRM todos los días.",
-    price: { monthly: 39.99, annual: 31.99 },
-    credits: "2,000",
+    price: { monthly: 49.99, annual: 39.99 },
+    credits: "2,500",
     multiplier: "2x",
     features: [
       "Todo lo del plan Starter",
@@ -39,8 +44,8 @@ const plans = [
   {
     name: "Ultra",
     description: "Para uso intensivo del CRM.",
-    price: { monthly: 129.99, annual: 99.99 },
-    credits: "10,000",
+    price: { monthly: 149.99, annual: 119.99 },
+    credits: "15,000",
     multiplier: "4x",
     features: [
       "Todo lo del plan Pro",
@@ -48,7 +53,7 @@ const plans = [
       "Múltiples pipelines",
       "Onboarding asistido",
     ],
-    cta: "Escribinos",
+    cta: "Elegir Ultra",
     popular: false,
   },
 ];
@@ -106,7 +111,7 @@ export function Pricing() {
             <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${
               isAnnual ? 'bg-[#D84040] text-white' : 'bg-[#E0E0E0] text-[#666666]'
             }`}>
-              hasta -23%
+              -20%
             </span>
           </button>
         </div>
