@@ -4,10 +4,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, ArrowRightIcon } from "./Icons";
 
-// Lógica de valor:
-// - Starter: $0.04/crédito (base)
-// - Pro: $0.02/crédito (2x mejor valor)
-// - Ultra: $0.01/crédito (4x mejor valor)
+// Multiplicador = créditos del plan / créditos de Starter
+// - Starter: 500 créditos (base)
+// - Pro: 2,500 créditos = 5x
+// - Ultra: 15,000 créditos = 30x
 
 const plans = [
   {
@@ -31,10 +31,10 @@ const plans = [
     description: "Para quienes usan el CRM todos los días.",
     price: { monthly: 49.99, annual: 39.99 },
     credits: "2,500",
-    multiplier: "2x",
+    multiplier: "5x",
     features: [
       "Todo lo del plan Starter",
-      "2x más valor en créditos",
+      "5x créditos vs Starter",
       "Alertas inteligentes",
       "Soporte prioritario",
     ],
@@ -46,10 +46,10 @@ const plans = [
     description: "Para uso intensivo del CRM.",
     price: { monthly: 149.99, annual: 119.99 },
     credits: "15,000",
-    multiplier: "4x",
+    multiplier: "30x",
     features: [
       "Todo lo del plan Pro",
-      "4x más valor en créditos",
+      "30x créditos vs Starter",
       "Múltiples pipelines",
       "Onboarding asistido",
     ],
@@ -83,7 +83,7 @@ export function Pricing() {
           <p className="text-xl text-[#666666] max-w-2xl mx-auto font-light">
             Pagás un fijo mensual con créditos AI incluidos.
             <br />
-            <span className="text-sm">Más grande el plan, más valor por tu dinero.</span>
+            <span className="text-sm">Más grande el plan, más créditos por tu dinero.</span>
           </p>
         </div>
 
