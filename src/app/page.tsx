@@ -1,4 +1,4 @@
-import { Navbar, Hero, ProductPreview, BentoGrid, TargetAudience, Pricing, CTA, Footer } from "@/components/landing";
+import { Navbar, Hero, ProductPreview, BentoGrid, PipelineFollowUp, TargetAudience, Pricing, CTA, Footer } from "@/components/landing";
 
 export default function Home() {
   return (
@@ -7,6 +7,7 @@ export default function Home() {
       <Hero />
       <ProductPreview />
       <BentoGrid />
+      <PipelineFollowUp />
       <TargetAudience />
       <Pricing />
       <CTA />
