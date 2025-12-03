@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,9 +27,13 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-[#8E1616] to-[#D84040] rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">C</span>
-          </div>
+          <Image 
+            src="/logo_cerremito.svg" 
+            alt="CERREMITO" 
+            width={32} 
+            height={32}
+            className="w-8 h-8"
+          />
           <span className="text-[#1D1616] font-semibold text-xl tracking-tight">
             CERREMITO
           </span>
