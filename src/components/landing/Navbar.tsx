@@ -43,7 +43,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <Button 
             variant="ghost" 
-            className="text-[#666666] hover:text-[#1D1616] hover:bg-white/50"
+            className="text-[#666666] hover:text-[#1D1616] hover:bg-[#E8E8E8]"
           >
             Iniciar sesión
           </Button>

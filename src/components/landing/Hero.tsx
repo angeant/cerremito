@@ -39,7 +39,7 @@ export function Hero() {
           <Button 
             variant="outline" 
             size="lg"
-            className="border-[#D0D0D0] hover:bg-white/80 hover:border-[#B0B0B0] px-8 py-6 text-lg rounded-xl"
+            className="border-[#D0D0D0] bg-white/50 text-[#1D1616] hover:bg-white hover:border-[#B0B0B0] hover:text-[#1D1616] px-8 py-6 text-lg rounded-xl"
           >
             Ver precios
           </Button>
